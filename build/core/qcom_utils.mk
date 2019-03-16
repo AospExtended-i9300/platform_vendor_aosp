@@ -44,10 +44,10 @@ QSD8K_BOARD_PLATFORMS := qsd8k
 
 
 # vars for use by utils
-empty :=
-space := $(empty) $(empty)
-colon := $(empty):$(empty)
-underscore := $(empty)_$(empty)
+empty_ :=
+space_ := $(empty_) $(empty_)
+colon_ := $(empty_):$(empty_)
+underscore_ := $(empty_)_$(empty_)
 
 # $(call match-word,w1,w2)
 # checks if w1 == w2
@@ -60,7 +60,7 @@ underscore := $(empty)_$(empty)
 #
 define match-word
 $(strip \
-  $(if $(or $(subst $(1),$(empty),$(2)),$(subst $(2),$(empty),$(1))),,true) \
+  $(if $(or $(subst $(1),$(empty_),$(2)),$(subst $(2),$(empty_),$(1))),,true) \
 )
 endef
 
@@ -75,8 +75,8 @@ endef
 # returns stripped word or empty
 define find-word-in-list
 $(strip \
-  $(eval wl:= $(colon)$(subst $(space),$(colon),$(strip $(2)))$(colon)) \
-  $(eval w:= $(colon)$(strip $(1))$(colon)) \
+  $(eval wl:= $(colon_)$(subst $(space_),$(colon_),$(strip $(2)))$(colon_)) \
+  $(eval w:= $(colon_)$(strip $(1))$(colon_)) \
   $(eval m:= $(findstring $(w),$(wl))) \
   $(if $(m),$(1),) \
 )
@@ -162,7 +162,7 @@ endef
 #
 # returns true or empty
 define is-chipset-in-board-platform
-$(call match-prefix,$(1),$(underscore),$(TARGET_BOARD_PLATFORM))
+$(call match-prefix,$(1),$(underscore_),$(TARGET_BOARD_PLATFORM))
 endef
 
 # $(call is-chipset-prefix-in-board-platform,prefix)
@@ -177,11 +177,11 @@ endef
 #
 define is-chipset-prefix-in-board-platform
 $(strip \
-  $(eval delim_a := $(empty)a$(empty)) \
+  $(eval delim_a := $(empty_)a$(empty_)) \
   $(if \
     $(or \
       $(call match-prefix,$(1),$(delim_a),$(TARGET_BOARD_PLATFORM)), \
-      $(call match-prefix,$(1),$(underscore),$(TARGET_BOARD_PLATFORM)), \
+      $(call match-prefix,$(1),$(underscore_),$(TARGET_BOARD_PLATFORM)), \
     ), \
     true, \
   ) \
@@ -229,7 +229,7 @@ endef
 # cnlist is combination/list of android codenames
 define is-android-codename-in-list
 $(strip \
-  $(eval acn := $(empty)) \
+  $(eval acn := $(empty_)) \
     $(foreach \
       i,$(1),\
       $(eval acn += \
