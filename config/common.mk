@@ -94,6 +94,7 @@ PRODUCT_COPY_FILES += \
 
 # Themes
 # Accents
+ifeq (true,false)
 PRODUCT_PACKAGES += \
     PixelTheme \
     AmberAccent \
@@ -162,6 +163,7 @@ PRODUCT_PACKAGES += \
     QStilesCircleOutline \
     QSTilesCircleGradient
 
+endif
 
 # Markup libs
 PRODUCT_COPY_FILES += \
