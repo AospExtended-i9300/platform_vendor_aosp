@@ -13,10 +13,13 @@ except:
     urllib.error = urllib2
     urllib.parse = urlparse
     urllib.request = urllib2
+
+from os.path import dirname, join, realpath
+
 try:
-    url = "https://raw.githubusercontent.com/AospExtended/official_devices/main/devices.json"
-    response = urllib.request.urlopen(url)
-    data = json.loads(response.read())
+    top = realpath(join(dirname(__file__), ".."))
+    devices = "{top}/devices.json".format(top = top)
+    data = json.loads(open(devices, "r").read())
     for res in data:
 	for version in res['supported_versions']:
 		if version['version_code'] == 'pie' or version['version_code'] == 'pie_go':
